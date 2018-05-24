@@ -6,12 +6,12 @@
             <name>pic32mm_oled_sh1106</name>
             <creation-uuid>1d5ee369-ecd9-4bff-a769-ee89d6d9659a</creation-uuid>
             <make-project-type>0</make-project-type>
-            <c-extensions/>
+            <c-extensions>c</c-extensions>
             <cpp-extensions/>
-            <header-extensions/>
+            <header-extensions>h</header-extensions>
             <asminc-extensions/>
-            <make-dep-projects/>
             <sourceEncoding>ISO-8859-1</sourceEncoding>
+            <make-dep-projects/>
         </data>
     </configuration>
 </project>
