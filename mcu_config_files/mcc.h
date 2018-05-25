@@ -1,4 +1,11 @@
+/*
+    File Name:        :  mcc.h
 
+    Device            :  PIC32MM0256GPM048
+    Compiler          :  XC32 2.05
+    MPLAB             :  MPLAB X 4.15
+    Created by        :  http://strefapic.blogspot.com
+*/
 
 #ifndef MCC_H
 #define	MCC_H
@@ -7,8 +14,10 @@
 #include "interrupt_manager.h"
 #include "exceptions.h"
 #include <xc.h>
-#include <stdint.h>
+#include <string.h> /*for memset() etc*/
+#include <stdint.h> /*uint8_t etc.*/
 #include <stdbool.h>
+#include <sys/attribs.h> /*for Interrupt*/
 
 #define _XTAL_FREQ  24000000UL
 
@@ -103,6 +112,3 @@ inline static void WDT_WatchdogTimerClear(void)
     WDTCONbits.WDTCLRKEY = WDT_CLR_KEY;
 }
 #endif	/* MCC_H */
-/**
- End of File
-*/
