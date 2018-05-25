@@ -68,11 +68,9 @@ void PIN_MANAGER_Initialize(void)
     /****************************************************************************
      * Setting the GPIO Direction SFR(s)
      ***************************************************************************/
-    TRISA = 0x87DF;
-    TRISB = 0xEFFF;
-    TRISC = 0x13FF;
-    TRISD = 0x0001;
-
+    /*set Input for PGD1 and PGC1*/
+    TRISBbits.TRISB0 = 1 ;
+    TRISBbits.TRISB1 = 1 ;
     /****************************************************************************
      * Setting the Weak Pull Up and Weak Pull Down SFR(s)
      ***************************************************************************/
@@ -96,10 +94,27 @@ void PIN_MANAGER_Initialize(void)
     /****************************************************************************
      * Setting the Analog/Digital Configuration SFR(s)
      ***************************************************************************/
-    ANSELA = 0x000F;
-    ANSELB = 0x001C;
-    ANSELC = 0x0123;
+    /*set pins for PGD1 and PGC1*/
+    ANSELBbits.ANSB0 = 0 ; /*set digital for PGD1*/
+    ANSELBbits.ANSB1 = 0 ; /*set digital for PGC1*/
+    
 
 
 }
+/* Piny analogowe na starcie, ustawienie : 0 - cyfrowe / 1 - analogowe
+RA0 --> ANSA0
+RA1 --> ANSA1
+RA2 --> ANSA2
+RA3 --> ANSA3
 
+RB0 --> ANSB0
+RB1 --> ANSB1
+RB2 --> ANSB2
+RB3 --> ANSB3
+RB4 --> ANSB4
+
+RC0 --> ANSC0
+RC1 --> ANSC1
+RC5 --> ANSC5
+RC8 --> ANSC8
+*/
