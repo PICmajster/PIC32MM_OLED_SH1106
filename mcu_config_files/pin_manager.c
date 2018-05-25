@@ -45,9 +45,6 @@
 */
 
 
-/**
-    Section: Includes
-*/
 #include <xc.h>
 #include "pin_manager.h"
 #include "mcc.h"
@@ -71,6 +68,12 @@ void PIN_MANAGER_Initialize(void)
     /*set Input for PGD1 and PGC1*/
     TRISBbits.TRISB0 = 1 ;
     TRISBbits.TRISB1 = 1 ;
+    /*set Output for OLED*/
+    TRISAbits.TRISA15 = 0 ;
+    TRISBbits.TRISB10 = 0 ;
+    TRISBbits.TRISB11 = 0 ;
+    TRISBbits.TRISB13 = 0 ;
+    
     /****************************************************************************
      * Setting the Weak Pull Up and Weak Pull Down SFR(s)
      ***************************************************************************/
@@ -97,22 +100,22 @@ void PIN_MANAGER_Initialize(void)
     /*set pins for PGD1 and PGC1*/
     ANSELBbits.ANSB0 = 0 ; /*set digital for PGD1*/
     ANSELBbits.ANSB1 = 0 ; /*set digital for PGC1*/
-    
-
+  
 
 }
 /* Piny analogowe na starcie, ustawienie : 0 - cyfrowe / 1 - analogowe
+ANSELA
 RA0 --> ANSA0
 RA1 --> ANSA1
 RA2 --> ANSA2
 RA3 --> ANSA3
-
+ANSELB
 RB0 --> ANSB0
 RB1 --> ANSB1
 RB2 --> ANSB2
 RB3 --> ANSB3
 RB4 --> ANSB4
-
+ANSELC
 RC0 --> ANSC0
 RC1 --> ANSC1
 RC5 --> ANSC5
