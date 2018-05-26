@@ -23,30 +23,30 @@
 
 /*Display Internal functions*/
 void initDisplay(void) ;     // initialise the display
-void sendCmd(byte) ;         // write a command to display
-void sendData(byte) ;        // write data to display
-void writeSD(byte);          // clock out serial data to the display controller
+void sendCmd(uint8_t) ;         // write a command to display
+void sendData(uint8_t) ;        // write data to display
+void writeSD(uint8_t);          // clock out serial data to the display controller
 
 /*Display Control*/
 void onDisplay(void) ;      // turn on OLED panel
 void offDisplay(void) ;     // turn off OLED panel
 void clsDisplay(void) ;     // erase the display DDRAM and set cursor home (0,0)
-void clLnDisplay(byte) ;    // clear line on display, cursor to line start
-void cursorXY(byte, byte) ; // position cursor to column, line
-void setContrast(byte) ;    // set contrast
+void clLnDisplay(uint8_t) ;    // clear line on display, cursor to line start
+void cursorXY(uint8_t, uint8_t) ; // position cursor to column, line
+void setContrast(uint8_t) ;    // set contrast
 
 /*Display*/
-void rptPix(byte, byte, byte) ; // repeat pixel across Display - show bar graph
-void barDisplay(byte) ;         // display bar graph
-void charFont5(byte);           // Write byte in font 5, via sendGlyphs
-void strFont5(byte []);         // Write Variable or Contstant string in font 5
-void strFont5XY(byte [], byte, byte);  // Write (V or C) string in font 5 @XY
-void strFont6RXY(byte [], byte, byte); // Write (V or C) string in font 22 @XY
-void byteFont5(byte) ;                 // Write 3 characters of byte in font 5
-void intFont5XY(int, byte, byte) ;     // Write 5 characters of int in font 5
-void byteFont5XY(byte, byte, byte);    // Write 3 characters of byte in font 5 @XY
-void digitFont5(byte) ;                // Send single digit to Display
-void digitFont5XY(byte, byte, byte) ;  // Send single digit to Display @XY
+void rptPix(uint8_t, uint8_t, uint8_t) ; // repeat pixel across Display - show bar graph
+void barDisplay(uint8_t) ;         // display bar graph
+void charFont5(uint8_t);           // Write byte in font 5, via sendGlyphs
+void strFont5(uint8_t []);         // Write Variable or Contstant string in font 5
+void strFont5XY(uint8_t [], uint8_t, uint8_t);  // Write (V or C) string in font 5 @XY
+void strFont6RXY(uint8_t [], uint8_t, uint8_t); // Write (V or C) string in font 22 @XY
+void byteFont5(uint8_t) ;                 // Write 3 characters of byte in font 5
+void intFont5XY(uint16_t, uint8_t, uint8_t) ;     // Write 5 characters of int in font 5
+void byteFont5XY(uint8_t, uint8_t, uint8_t);    // Write 3 characters of byte in font 5 @XY
+void digitFont5(uint8_t) ;                // Send single digit to Display
+void digitFont5XY(uint8_t, uint8_t, uint8_t) ;  // Send single digit to Display @XY
 
 // private functions for reference
 // void sendGlyphs(const byte *, byte);  //Send any font row to print character

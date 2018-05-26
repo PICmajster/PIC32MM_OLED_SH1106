@@ -6,7 +6,7 @@
 //GLCD FontName : Verdana5x8
 //GLCD FontSize : 5 x 8
 
-code const unsigned char font5[59][5] =
+const unsigned char font5[59][5] =
 { // ASCII table for OLED: 96 rows * 5 bytes= 480 bytes
 /* // mask first 14 chars and >'Z' to save ROM space, modify charLCD5
  {0x00, 0x00, 0x00, 0x00, 0x00}, // Code for char SPACE
