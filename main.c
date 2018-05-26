@@ -13,6 +13,7 @@ int main(void)
 {
     // initialize the device
     SYSTEM_Initialize();
+    initDisplay(); /*Alleluja*/
 
     // When using interrupts, you need to set the Global Interrupt Enable bits
     // Use the following macros to:
