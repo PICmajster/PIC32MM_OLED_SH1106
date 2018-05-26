@@ -23,7 +23,7 @@ int main(void)
 
     // Disable the Global Interrupts
     //INTERRUPT_GlobalDisable();
-
+    strFont5XY("Hello World", 30, 1) ;
     while (1)
     {
         // Add your application code

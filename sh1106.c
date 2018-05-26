@@ -111,3 +111,35 @@ void cursorXY(uint8_t x, uint8_t y)
   cursorY(y) ; // Y axis = line 0-7
   cursorX(x) ; // X axis = column 0 - (sWidth - 1)
 }
+
+void strFont5(uint8_t s[])
+{ // Write Variable or Contatant string to Font5
+  while(*s) {charFont5(*s++);} // Points to character, or terminator
+}
+
+void strFont5XY(uint8_t s[], uint8_t x, uint8_t y)
+{ // Write (V or C) string to Font5 @ XY
+  cursorXY(x,y);
+  strFont5(s);
+}
+void sendGlyphs(const uint8_t *pRow, uint8_t size)
+{ //Send any font row to print character
+  uint8_t count ;
+  for (count = 0 ; count < size ; count++)  // Send row to print the character
+  {
+  sendData((pRow[count])) ;
+  }
+  sendData(0x00);  // 1 pixel horizontal space after character
+}
+
+// Font5 functions (5x8)
+void charFont5(uint8_t character) // MODIFY IF FONT RANGE CHANGED
+{ // Prepare to write byte to Font5, via sendGlyphs
+  if (character == ' ')  // munge ' ' to empty ';' character
+   { character = ';' ; }
+  if ((character<'.')||(character>'Z')) // reduced font5 table, CAPS only
+   { return ; }    // Exit function if character out of ASCII range
+  //Index to row of the character in font5 table, then send glyphs
+  sendGlyphs(font5[character - '.'], sizeof font5[0]);
+}
+
