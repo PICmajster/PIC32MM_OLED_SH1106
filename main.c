@@ -7,13 +7,14 @@
 */
 #include "mcu_config_files/mcc.h"
 #include "delay.h"
+#include "sh1106.h"
 
 
 int main(void)
 {
     // initialize the device
     SYSTEM_Initialize();
-    initDisplay(); /*Alleluja*/
+    //initDisplay(); /*Alleluja*/
 
     // When using interrupts, you need to set the Global Interrupt Enable bits
     // Use the following macros to:
@@ -23,9 +24,10 @@ int main(void)
 
     // Disable the Global Interrupts
     //INTERRUPT_GlobalDisable();
-    strFont5XY("HELLO WORLD", 30, 1) ;
+    //strFont5XY("HELLO WORLD", 30, 1) ;
     while (1)
     {
-        // Add your application code
+        sendCmd(0xAE) ;
+        delayMs(100) ;
     }
 }
