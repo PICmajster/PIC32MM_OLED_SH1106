@@ -22,9 +22,11 @@
 
 void initDisplay(void)
 {
-  DisplayRST = 0 ;  // reset display (RST is active LOW)
+  //DisplayRST = 0 ;  // reset display (RST is active LOW)
+  DisplayCS = 1 ;  
   delayMs(25) ;     // minimum 10uS, oryginalnie Felek dal 20ms
-  DisplayRST = 1 ;  // release reset
+  //DisplayRST = 1 ;  // release reset
+  DisplayCS = 0 ;
   sendCmd(0xAE) ;   // turn off OLED panel                                 [#11]
   sendCmd(0xC8) ;   // set COM scan direction 0-n [POR = C0, C8]           [#13]
   sendCmd(0xA1) ;   // set SEG/Column left/right re-map [POR = A0, A1]     [#6]
@@ -38,19 +40,21 @@ void initDisplay(void)
 void sendCmd(uint8_t cmdOut)
 { // Write a command to Display
    DisplayD_C = 0 ;   // set A0 low, select Command mode DisplayD_C = 0 for this byte
+   DisplayCS = 0 ;
    writeSD(cmdOut) ;  // Clock out command bits
-   DisplayD_C = 1 ;   // set A0 high, select Data mode DisplayD_C = 1 for next ...
-}
+   }
 
 void sendData(uint8_t dataOut)
 { // Write data to Display, DisplayD_C = 1 set after sendCmd()
-  //  DisplayD_C = 1 ;     // set A0 high, select Data mode DisplayD_C = 1
+  DisplayD_C = 1 ;     // set A0 high, select Data mode DisplayD_C = 1
+  DisplayCS = 0 ;
   writeSD(dataOut) ;   // Clock out data bits
 }
 
 void writeSD(uint8_t byteOut)
 { // Clocks out data to the SSD1106 controller
   uint8_t bitcnt ;
+  DisplayCS = 0 ;
   for (bitcnt = 8 ; bitcnt > 0 ; bitcnt--)
   {
     DisplayCLK = 0 ;           // Set clock low
@@ -58,6 +62,8 @@ void writeSD(uint8_t byteOut)
     DisplayCLK = 1 ;           // clock data bit on the rising edge of DisplayCLK
     byteOut = byteOut << 1 ;   // logical shift left: get next bit to b7
   }
+  DisplayCLK = 0 ;
+  DisplayCS = 1 ;
 }
 
 void setContrast(unsigned char contr)
