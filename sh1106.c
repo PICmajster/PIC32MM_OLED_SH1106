@@ -52,13 +52,15 @@ void writeSD(uint8_t byteOut)
 { // Clocks out data to the SSD1106 controller
   uint8_t bitcnt ;
   DisplayCS = 0 ;
+  DisplayCLK = 0 ;           
   delayUs(1);
   for (bitcnt = 8 ; bitcnt > 0 ; bitcnt--)
   {
-    DisplayCLK = 0 ;           // Set clock low
-    delayUs(1);
     DisplaySDI = (byteOut&0x80) ? 1 : 0 ;  // transfer current bit 7 of byteOut to DisplaySDI pin
+    delayUs(1);
     DisplayCLK = 1 ; 
+    delayUs(1);
+    DisplayCLK = 0 ;
     delayUs(1);
     byteOut = byteOut << 1 ;   // logical shift left: get next bit to b7
   }
