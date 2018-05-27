@@ -57,8 +57,7 @@ void writeSD(uint8_t byteOut)
   {
     DisplayCLK = 0 ;           // Set clock low
     delayUs(1);
-    DisplaySDI = (byteOut & 0x80 == 0x80) ? 1 : 0 ;  // transfer current bit 7 of byteOut to DisplaySDI pin
-    
+    DisplaySDI = (byteOut&0x80) ? 1 : 0 ;  // transfer current bit 7 of byteOut to DisplaySDI pin
     DisplayCLK = 1 ; 
     delayUs(1);
     byteOut = byteOut << 1 ;   // logical shift left: get next bit to b7
@@ -66,7 +65,7 @@ void writeSD(uint8_t byteOut)
   DisplayCLK = 0 ;
   delayUs(1);
   DisplayCS = 1 ;
-  delayUs(1);
+  
 }
 
 void setContrast(unsigned char contr)
