@@ -13,7 +13,8 @@
 #define DisplayD_C   PORTAbits.RA15         
 #define DisplaySDI   PORTBbits.RB10        
 #define DisplayCS    PORTBbits.RB11
-#define DisplayCLK   PORTBbits.RB13          
+#define DisplayCLK   PORTBbits.RB13 
+#define DisplayRST   PORTCbits.RC9 
 
 #define sWidth 128      // screen width
 #define sXOffset 2      // x offset

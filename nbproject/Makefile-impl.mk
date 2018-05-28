@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=pic32mm_oled_sh1106.x
+PROJECTNAME=pic32mm_oled_sh1106.X
 
 # Active Configuration
 DEFAULTCONF=default
