@@ -16,7 +16,17 @@ int main(void)
     SYSTEM_Initialize();
     initDisplay(); /*Alleluja*/
 
-    // When using interrupts, you need to set the Global Interrupt Enable bits
+        strFont5XY("HELLO WORLD", 30, 1) ;
+    while (1)
+    {
+//        sendCmd(0xAE) ;
+//        delayMs(100) ;
+    }
+}
+
+
+
+// When using interrupts, you need to set the Global Interrupt Enable bits
     // Use the following macros to:
 
     // Enable the Global Interrupts
@@ -24,10 +34,3 @@ int main(void)
 
     // Disable the Global Interrupts
     //INTERRUPT_GlobalDisable();
-    strFont5XY("HELLO WORLD", 30, 1) ;
-    while (1)
-    {
-//        sendCmd(0xAE) ;
-//        delayMs(100) ;
-    }
-}
