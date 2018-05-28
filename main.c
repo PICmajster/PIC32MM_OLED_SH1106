@@ -16,11 +16,11 @@ int main(void)
     SYSTEM_Initialize();
     initDisplay(); /*Alleluja*/
 
-        strFont5XY("HELLO WORLD", 30, 1) ;
+    //strFont5XY("HELLO WORLD", 30, 1) ;
     while (1)
     {
-//        sendCmd(0xAE) ;
-//        delayMs(100) ;
+        strFont5XY("HELLO WORLD", 30, 1) ;
+        delayMs(1000) ;
     }
 }
 
