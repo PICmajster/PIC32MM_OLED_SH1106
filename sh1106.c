@@ -22,8 +22,9 @@
 
 void initDisplay(void)
 {
-  DisplayCS = 1 ;  
-  delayMs(25) ;     // minimum 10uS, oryginalnie Felek dal 20ms
+  DisplayRST = 0 ;  // reset display (RST is active LOW)
+  delayMs(20) ;     // minimum 10uS, oryginalnie Felek dal 25ms
+  DisplayRST = 1 ;  // release reset
   sendCmd(0xAE) ;   // turn off OLED panel                                 [#11]
   sendCmd(0xC8) ;   // set COM scan direction 0-n [POR = C0, C8]           [#13]
   sendCmd(0xA1) ;   // set SEG/Column left/right re-map [POR = A0, A1]     [#6]
