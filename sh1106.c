@@ -28,7 +28,7 @@ void initDisplay(void)
   sendCmd(0xAE) ;   // turn off OLED panel                                 [#11]
   sendCmd(0xC8) ;   // set COM scan direction 0-n [POR = C0, C8]           [#13]
   sendCmd(0xA1) ;   // set SEG/Column left/right re-map [POR = A0, A1]     [#6]
-//  sendCmd(0xA4) ; // Entire Display Force On [POR = A4, A5 force on]     [#7]
+  sendCmd(0xA4) ;   // Entire Display Force On [POR = A4, A5 force on]     [#7]
   clsDisplay() ;    // clear RAM data and zero cursor
   setContrast(128) ;// POR value = 0x80
   sendCmd(0xAF) ;   // turn on OLED panel                                  [#11]
