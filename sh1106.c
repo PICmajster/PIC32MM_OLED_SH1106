@@ -25,14 +25,43 @@ void initDisplay(void)
   DisplayRST = 0 ;  // reset display (RST is active LOW)
   delayMs(20) ;     // minimum 10uS, oryginalnie Felek dal 25ms
   DisplayRST = 1 ;  // release reset
-  sendCmd(0xAE) ;   // turn off OLED panel                                 [#11]
-  sendCmd(0xC8) ;   // set COM scan direction 0-n [POR = C0, C8]           [#13]
-  sendCmd(0xA1) ;   // set SEG/Column left/right re-map [POR = A0, A1]     [#6]
-//  sendCmd(0xA4) ; // Entire Display Force On [POR = A4, A5 force on]     [#7]
-  clsDisplay() ;    // clear RAM data and zero cursor
-  setContrast(128) ;// POR value = 0x80
-  sendCmd(0xAF) ;   // turn on OLED panel                                  [#11]
-  delayMs(100) ;    // at least 100mS after 0xAF command
+//  sendCmd(0xAE) ;   // turn off OLED panel                                 [#11]
+//  sendCmd(0xC8) ;   // set COM scan direction 0-n [POR = C0, C8]           [#13]
+//  sendCmd(0xA1) ;   // set SEG/Column left/right re-map [POR = A0, A1]     [#6]
+////  sendCmd(0xA4) ; // Entire Display Force On [POR = A4, A5 force on]     [#7]
+//  clsDisplay() ;    // clear RAM data and zero cursor
+//  setContrast(128) ;// POR value = 0x80
+//  sendCmd(0xAF) ;   // turn on OLED panel                                  [#11]
+//  delayMs(100) ;    // at least 100mS after 0xAF command
+sendCmd(0xAE) ;
+sendCmd(0x00) ;
+sendCmd(0x10) ;
+sendCmd(0xB0) ;
+sendCmd(0x40) ;
+sendCmd(0xA1) ;
+sendCmd(0xDA) ;
+sendCmd(0x12) ;
+sendCmd(0xD3) ;
+sendCmd(0x00) ;
+sendCmd(0xC0) ;
+sendCmd(0xA6) ;
+sendCmd(0xA4) ;
+sendCmd(0x81) ;
+sendCmd(0x50) ;
+sendCmd(0xA8) ;
+sendCmd(0x3F) ;
+sendCmd(0xD5) ;
+sendCmd(0x80) ;
+sendCmd(0xD9) ;
+sendCmd(0xF1) ;
+sendCmd(0xDB) ;
+sendCmd(0x40) ;
+sendCmd(0x8D) ;
+sendCmd(0x14) ;
+sendCmd(0xAF) ;
+delayMs(100) ;    // at least 100mS after 0xAF command
+
+
 }
 
 void sendCmd(uint8_t cmdOut)
