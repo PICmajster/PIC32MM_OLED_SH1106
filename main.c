@@ -17,14 +17,8 @@ int main(void)
     initDisplay(); /*Alleluja*/
 
     strFont5XY("HELLO WORLD", 30, 1) ;
-   
-    cursorXY(10, 10) ;
-    charfont6Ra('1') ;
-    //charfont6Rb('1') ;
-    //charfont6Rc('1') ;
-    //charfont6Rd('1') ;
-    //charfont6Re('1') ;
-    //charfont6Rf('1') ;
+    strfont6RXY("1" , 10, 10);
+    
     
     while (1)
     {
