@@ -306,19 +306,19 @@ void strfont6Rf(uint8_t s[])
   while(*s) {charfont6Rf(*s++);} // Points to character, or terminator
 }
 
-void strfont6RXY(uint8_t s[], uint8_t x, uint8_t y)
+void strFont6RXY(uint8_t s[], uint8_t x, uint8_t y)
 { // Write (V or C) string to font6R @ XY
   cursorXY(x, y) ;
     strfont6Ra(s) ;
-//  cursorXY(x, y+1) ;
-//    strfont6Rb(s) ;
-//  cursorXY(x, y+2) ;
-//    strfont6Rc(s) ;
-//  cursorXY(x, y+3) ;
-//    strfont6Rd(s) ;
-//  cursorXY(x, y+4) ;
-//    strfont6Re(s) ;
-//  cursorXY(x, y+5) ;
-//    strfont6Rf(s) ;
+  cursorXY(x, y+1) ;
+    strfont6Rb(s) ;
+  cursorXY(x, y+2) ;
+    strfont6Rc(s) ;
+  cursorXY(x, y+3) ;
+    strfont6Rd(s) ;
+  cursorXY(x, y+4) ;
+    strfont6Re(s) ;
+  cursorXY(x, y+5) ;
+    strfont6Rf(s) ;
 }
 // End of font6R functions
