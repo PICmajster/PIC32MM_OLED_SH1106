@@ -63,9 +63,5 @@ void strfont6Re(uint8_t s[]);
 void strfont6Rf(uint8_t s[]);
 
 
-
-// private functions for reference
-// void sendGlyphs(const byte *, byte);  //Send any font row to print character
-
 #endif	/* SH1106_H */
 
