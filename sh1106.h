@@ -37,6 +37,7 @@ void cursorXY(uint8_t, uint8_t) ; // position cursor to column, line
 void setContrast(uint8_t) ;    // set contrast
 
 /*Display*/
+void sendGlyphs(const uint8_t *pRow, uint8_t size); //Send any font row to print character
 void rptPix(uint8_t, uint8_t, uint8_t) ; // repeat pixel across Display - show bar graph
 void barDisplay(uint8_t) ;         // display bar graph
 void charFont5(uint8_t);           // Write byte in font 5, via sendGlyphs
@@ -48,6 +49,20 @@ void intFont5XY(uint16_t, uint8_t, uint8_t) ;     // Write 5 characters of int i
 void byteFont5XY(uint8_t, uint8_t, uint8_t);    // Write 3 characters of byte in font 5 @XY
 void digitFont5(uint8_t) ;                // Send single digit to Display
 void digitFont5XY(uint8_t, uint8_t, uint8_t) ;  // Send single digit to Display @XY
+void charfont6Ra(uint8_t character);
+void charfont6Rb(uint8_t character);
+void charfont6Rc(uint8_t character);
+void charfont6Rd(uint8_t character);
+void charfont6Re(uint8_t character);
+void charfont6Rf(uint8_t character);
+void strfont6Ra(uint8_t s[]);
+void strfont6Rb(uint8_t s[]);
+void strfont6Rc(uint8_t s[]);
+void strfont6Rd(uint8_t s[]);
+void strfont6Re(uint8_t s[]);
+void strfont6Rf(uint8_t s[]);
+
+
 
 // private functions for reference
 // void sendGlyphs(const byte *, byte);  //Send any font row to print character

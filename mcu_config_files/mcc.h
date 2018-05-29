@@ -18,6 +18,7 @@
 #include <stdint.h> /*uint8_t etc.*/
 #include <stdbool.h>
 #include <sys/attribs.h> /*for Interrupt*/
+#include <stdio.h> /*sprintf() etc*/
 
 #define _XTAL_FREQ  24000000UL
 

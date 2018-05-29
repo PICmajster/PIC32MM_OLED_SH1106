@@ -123,16 +123,6 @@ void cursorXY(uint8_t x, uint8_t y)
   cursorX(x) ; // X axis = column 0 - (sWidth - 1)
 }
 
-void strFont5(uint8_t s[])
-{ // Write Variable or Contatant string to Font5
-  while(*s) {charFont5(*s++);} // Points to character, or terminator
-}
-
-void strFont5XY(uint8_t s[], uint8_t x, uint8_t y)
-{ // Write (V or C) string to Font5 @ XY
-  cursorXY(x,y);
-  strFont5(s);
-}
 void sendGlyphs(const uint8_t *pRow, uint8_t size)
 { //Send any font row to print character
   uint8_t count ;
@@ -143,7 +133,36 @@ void sendGlyphs(const uint8_t *pRow, uint8_t size)
   sendData(0x00);  // 1 pixel horizontal space after character
 }
 
+void rptPix(uint8_t pix, uint8_t blank, uint8_t percent)
+{ // repeat pixel across Display for percent - show bar graph
+  uint8_t count ;
+  int width ;
+  width = (sWidth*percent)/100 ; // screen width x fill level
+  for (count=0; count<sWidth; count++)  // loop for width
+  {
+   if ((count <= width)||(count > (sWidth - 2)))
+   {  sendData(pix) ; }  // send 'pix' glyph to display
+   else
+   {  sendData(blank) ;} // send 'blank' glyph to display
+  }
+}
+
+void barDisplay(uint8_t barG)
+{// water bargraph on line 7  
+  cursorXY(0, 7) ;
+  rptPix(0b11111111, 0b10000001, barG);  // Draw line, then blanks
+}
+
+// Display FONTS:
+// 5x8 (1-line, full 7-bit ASCII from space)
+// 34x48 (6 lines, numerals only, ASCII 48 - 57) Calibri Bold 54
+
+// Display FONTS:
+// 5x8 (1-line, full 7-bit ASCII from space)
+// 34x48 (6 lines, numerals only, ASCII 48 - 57) Calibri Bold 54
+
 // Font5 functions (5x8)
+
 void charFont5(uint8_t character) // MODIFY IF FONT RANGE CHANGED
 { // Prepare to write byte to Font5, via sendGlyphs
   if (character == ' ')  // munge ' ' to empty ';' character
@@ -154,3 +173,152 @@ void charFont5(uint8_t character) // MODIFY IF FONT RANGE CHANGED
   sendGlyphs(font5[character - '.'], sizeof font5[0]);
 }
 
+void strFont5(uint8_t s[])
+{ // Write Variable or Contatant string to Font5
+  while(*s) {charFont5(*s++);} // Points to character, or terminator
+}
+
+void strFont5XY(uint8_t s[], uint8_t x, uint8_t y)
+{ // Write (V or C) string to Font5 @ XY
+  cursorXY(x,y);
+  strFont5(s);
+}
+
+void byteFont5XY(uint8_t num, uint8_t x, uint8_t y)
+{ // display byte value at XY
+  char txt4[4];
+  //ByteToStr(num, txt4);
+  sprintf(txt4,"%i",num);
+  strFont5XY(txt4, x, y);
+}
+
+void intFont5XY(uint16_t num, uint8_t x, uint8_t y)
+{ // display int value at XY
+  char txt7[7];
+  //IntToStr(num, txt7);
+  sprintf(txt7,"%i",num);
+  strFont5XY(txt7, x, y);
+}
+
+void byteFont5(uint8_t num)
+{ // display byte value at cursor
+  char txt4[4];
+  //ByteToStr(num, txt4);
+  strFont5(txt4);
+}
+
+void digitFont5(uint8_t digit) // send single digit to Display
+{
+  charFont5(digit + '0');
+}
+
+void digitFont5XY(uint8_t digit, uint8_t x, uint8_t y) // send single digit to Display @ x, y
+{
+  cursorXY(x,y);
+  digitFont5(digit) ;
+}
+
+// End of Font5 functions
+
+// Font6R functions (34x48) numerals only
+
+void charfont6Ra(uint8_t character)
+{ // Prepare top 22 bytes for Display, via sendGlyphs (numerals, space and '.' only)
+  //if (character==' ') {character='/';} // Munge ' ' into '/' for blank glyph
+  if ((character<'0')||(character>'9'))
+  { return ; }    // Exit function if character out of numeric range
+  //Index to row of the character in font6R table, then send glyphs
+  sendGlyphs(font6Ra[character - '0'], sizeof font6Ra[0]);
+}
+
+void charfont6Rb(uint8_t character)
+{ // Prepare middle1 22 bytes for Display, via sendGlyphs
+  // if (character==' ') {character='/';} // Munge ' ' into '/' for blank glyph
+  if ((character<'0')||(character>'9'))
+  { return ; }    // Exit function if character out of numeric range
+  //Index to row of the character in font6R table, then send glyphs
+  sendGlyphs(font6Rb[character - '0'], sizeof font6Rb[0]);
+}
+
+void charfont6Rc(uint8_t character)
+{ // Prepare middle2 22 bytes for Display, via sendGlyphs
+  // if (character==' ') {character='/';} // Munge ' ' into '/' for blank glyph
+  if ((character<'0')||(character>'9'))
+  { return ; }     // Exit function if character out of numeric range
+  //Index to row of the character in font6R table, then send glyphs
+  sendGlyphs(font6Rc[character - '0'], sizeof font6Rc[0]);
+}
+
+void charfont6Rd(uint8_t character)
+{ // Prepare lower 22 bytes for Display, via sendGlyphs
+  // if (character==' ') {character='/';} // Munge ' ' into '/' for blank glyph
+  if ((character<'0')||(character>'9'))
+  { return ; }   // Exit function if character out of numeric range
+  //Index to row of the character in font6R table, then send glyphs
+  sendGlyphs(font6Rd[character - '0'], sizeof font6Rd[0]);
+}
+
+void charfont6Re(uint8_t character)
+{ // Prepare lower 22 bytes for Display, via sendGlyphs
+  // if (character==' ') {character='/';} // Munge ' ' into '/' for blank glyph
+  if ((character<'0')||(character>'9'))
+  { return ; }   // Exit function if character out of numeric range
+  //Index to row of the character in font6R table, then send glyphs
+  sendGlyphs(font6Re[character - '0'], sizeof font6Re[0]);
+}
+
+void charfont6Rf(uint8_t character)
+{ // Prepare lower 22 bytes for Display, via sendGlyphs
+  // if (character==' ') {character='/';} // Munge ' ' into '/' for blank glyph
+  if ((character<'0')||(character>'9'))
+  { return ; }   // Exit function if character out of numeric range
+  //Index to row of the character in font6R table, then send glyphs
+  sendGlyphs(font6Rf[character - '0'], sizeof font6Rf[0]);
+}
+
+void strfont6Ra(uint8_t s[])
+{ // Write (V or C) string to font6Ra
+  while(*s) {charfont6Ra(*s++);} // Points to character, or terminator
+}
+
+void strfont6Rb(uint8_t s[])
+{ // Write (V or C) string to font6Rb
+  while(*s) {charfont6Rb(*s++);} // Points to character, or terminator
+}
+
+void strfont6Rc(uint8_t s[])
+{ // Write (V or C) string to font6Rc
+  while(*s) {charfont6Rc(*s++);} // Points to character, or terminator
+}
+
+void strfont6Rd(uint8_t s[])
+{ // Write (V or C) string to font6Rd
+  while(*s) {charfont6Rd(*s++);} // Points to character, or terminator
+}
+
+void strfont6Re(uint8_t s[])
+{ // Write (V or C) string to font6Rd
+  while(*s) {charfont6Re(*s++);} // Points to character, or terminator
+}
+
+void strfont6Rf(uint8_t s[])
+{ // Write (V or C) string to font6Rd
+  while(*s) {charfont6Rf(*s++);} // Points to character, or terminator
+}
+
+void strfont6RXY(uint8_t s[], uint8_t x, uint8_t y)
+{ // Write (V or C) string to font6R @ XY
+  cursorXY(x, y) ;
+    strfont6Ra(s) ;
+  cursorXY(x, y+1) ;
+    strfont6Rb(s) ;
+  cursorXY(x, y+2) ;
+    strfont6Rc(s) ;
+  cursorXY(x, y+3) ;
+    strfont6Rd(s) ;
+  cursorXY(x, y+4) ;
+    strfont6Re(s) ;
+  cursorXY(x, y+5) ;
+    strfont6Rf(s) ;
+}
+// End of font6R functions
