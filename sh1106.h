@@ -43,7 +43,7 @@ void barDisplay(uint8_t) ;         // display bar graph
 void charFont5(uint8_t);           // Write byte in font 5, via sendGlyphs
 void strFont5(uint8_t []);         // Write Variable or Contstant string in font 5
 void strFont5XY(uint8_t [], uint8_t, uint8_t);  // Write (V or C) string in font 5 @XY
-void strfont6RXY(uint8_t [], uint8_t, uint8_t); // Write (V or C) string in font 22 @XY
+void strFont6RXY(uint8_t [], uint8_t, uint8_t); // Write (V or C) string in font 22 @XY
 void byteFont5(uint8_t) ;                 // Write 3 characters of byte in font 5
 void intFont5XY(uint16_t, uint8_t, uint8_t) ;     // Write 5 characters of int in font 5
 void byteFont5XY(uint8_t, uint8_t, uint8_t);    // Write 3 characters of byte in font 5 @XY
